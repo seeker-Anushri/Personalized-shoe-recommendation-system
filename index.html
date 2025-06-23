@@ -1,0 +1,238 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Relief:wght@400;700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans+JP:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="input.css">
+    <script src="script.js" defer></script>
+    <title>Document</title>
+</head>
+<body>
+  <div id="backgroundmain" class="justify-center items-center mx-7 my-7 bg-[#9753B7] border-2 border-white rounded-2xl px-20 py-20">
+  <h1 class="font-bold text-4xl text-yellow-100">Real-time Foot Pressure Data</h1>
+  <div id="status">Connecting to WebSocket...</div>
+  <div id="data" class="bg-blue-300 text-lg rounded-lg">Waiting for data...</div>
+  <div id="block" class="bg-blue-300 text-lg rounded-lg w-2/6 px-4 mt-20">
+  <div id="foot-type" class="foot-type mt-2">Foot type: Detecting...</div>
+  </div>
+
+  <div id="medical-solutions" class="border-2 border-white rounded-2xl items-center p-2">
+    <h2 class="font-bold">Medical Solutions</h2>
+
+    <div id="flatfoot-solutions" class="solution">
+      <h3>Solutions for Flatfoot</h3>
+      <ul class="solution-list">
+        <li>Custom orthotic insoles to provide better arch support.</li>
+        <li>Physical therapy exercises to strengthen the foot muscles:-</li>
+        <ol class="exercises-list">
+          <li><b>Heel cord stretches:</b>involves gently lengthening the Achilles tendon to improve flexibility and
+            alleviate pain or tightness in the calf and heel.</li>
+          <li><b>Arch lifts: </b>trengthen the intrinsic muscles in the foot, particularly those supporting the arch, by
+            lifting the arch while keeping the toes and heel on the ground. </li>
+          <li><b>Towel curls: </b>It is done in a seating position with a towel under your involved foot while seated
+            draw
+            the towel back towards you using your toes. It is an effective and easy way to strengthen the muscles in
+            your
+            feet, particularly the plantar fascia</li>
+          <li><b>Tennis/golf ball rolls: </b>Rolling a tennis or golf ball under the foot can help to massage and
+            stretch the plantar fascia. </li>
+          <li><b>Toe raises:</b>strengthens the muscles on the front of your lower leg (shin muscles) and improves ankle
+            stability and balance.</li>
+        </ol>
+        <li>Proper footwear with good arch support and cushioning.</li>
+        <li>Surgical options for severe cases if non-invasive treatments are ineffective.</li>
+      </ul>
+      <h3> When to seek Medical assistance</h3>
+      <ul class="assistance-list">
+        <li>If you experience persistent pain, stiffness, or difficulty walking.</li>
+        <li>If you suspect you have flat feet and are experiencing symptoms.</li>
+        <li>If non-surgical treatments are not providing adequate relief.</li>
+        <li>If you have a history of foot problems or injuries. </li>
+      </ul>
+    </div>
+
+    <div id="higharch-solutions" class="solution">
+      <h3>Solutions for High Arch</h3>
+      <ul class="solution-list">
+        <li>Use of cushioning insoles to reduce foot strain and absorb shock.</li>
+        <li>Stretching exercises to prevent tightness in the foot muscles.</li>
+        <li>Wearing shoes with adequate arch support and cushioning.</li>
+        <li>Physical therapy to improve foot function and balance.</li>
+        <ol class="therapies">
+          <li><b>Balance Exercises:</b>Exercises that improve proprioception (awareness of body position) like standing
+            on one foot or using a wobble board can improve balance and stability. </li>
+          <li><b>Ankle Muscles: </b>Exercises like ankle inversions and eversions strengthen the muscles around the
+            ankle joint, improving stability and reducing the risk of sprains. </li>
+          <li><b>Arch Support:</b>Exercises like arch lifts (foot doming) can strengthen the muscles that support the
+            arch. </li>
+          <li><b>Heel Cord Stretch</b>Stretching the Achilles tendon and calf muscles can help reduce tension that can
+            pull on the plantar fascia. </li>
+        </ol>
+      </ul>
+    </div>
+
+    <div id="normalfoot-solutions" class="solution">
+      <h3>Solutions for Normal Foot</h3>
+      <ul class="solution-list">
+        <li>Maintain a healthy weight to avoid excessive pressure on the feet.</li>
+        <li>Regular foot stretches and exercises to keep the muscles flexible.</li>
+        <li>Wear shoes that support the natural arch of the foot.</li>
+        <li>Regular check-ups with a podiatrist to monitor foot health.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Real-time Foot Pressure</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Relief:wght@400;700&family=Montserrat&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./css/style.css" />
+  <link rel="stylesheet" href="input.css" />
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <div id="backgroundmain" class="justify-center items-center mx-7 my-7 bg-[#9753B7] border-2 border-white rounded-2xl px-20 py-20">
+    <h1 class="font-bold text-4xl text-yellow-100">Real-time Foot Pressure Data</h1>
+
+    <!-- Report Info + Download Button -->
+    <div id="report-header" class="text-white my-4">
+      <div><b>Patient ID:</b> <span id="patient-id">PID12345</span></div>
+      <div><b>Report Generated:</b> <span id="timestamp"></span></div>
+    </div>
+
+    <button onclick="downloadPDF()" class="mt-4 bg-yellow-200 hover:bg-yellow-300 text-black font-semibold py-2 px-4 rounded">
+      Download PDF Report
+    </button>
+
+    <div id="status">Connecting to WebSocket...</div>
+    <div id="data" class="bg-blue-300 text-lg rounded-lg">Waiting for data...</div>
+
+    <div id="block" class="bg-blue-300 text-lg rounded-lg w-2/6 px-4 mt-20">
+      <div id="foot-type" class="foot-type mt-2">Foot type: Detecting...</div>
+    </div>
+
+    <div id="medical-solutions" class="border-2 border-white rounded-2xl items-center p-2">
+      <h2 class="font-bold">Medical Solutions</h2>
+
+      <!-- Flatfoot Section -->
+      <div id="flatfoot-solutions" class="solution">
+        <h3>Solutions for Flatfoot</h3>
+        <ul class="solution-list">
+          <li>Custom orthotic insoles to provide better arch support.</li>
+          <li>Physical therapy exercises to strengthen the foot muscles:</li>
+          <br>
+          <ol class="exercises-list">
+            <li><b>Heel cord stretches:</b> Lengthen the Achilles tendon to improve flexibility.</li>
+            <li><b>Arch lifts:</b> Strengthen the intrinsic muscles supporting the arch.</li>
+            <li><b>Towel curls:</b> Use your toes to scrunch a towel toward you to build foot strength.</li>
+            <li><b>Ball rolls:</b> Massage and stretch the plantar fascia.</li>
+            <li><b>Toe raises:</b> Enhance ankle stability and shin strength.</li>
+          </ol>
+          <br>
+          <li>Supportive footwear with cushioning and arch support.</li>
+          <li>Surgical options for severe cases.</li>
+        </ul>
+        <br>
+        <h3><b>Recommended Footwear</b></h3>
+        <a href="https://www.zappos.com/p/mens-hoka-clifton-9-nimbus-cloud-steel-wool/product/9818111/color/1047316?PID=100086039&AID=14044464&utm_source=Skimlinks&splash=none&utm_medium=affiliate&cjevent=7f71c420461611f0811800390a18b8fb&utm_campaign=5370367&utm_term=100086039&utm_content=14044464&zap_placement=74968X1576254Xe039de0029b8b7c3d0d56be3e0195c08" target="_blank" class="text-blue-100 underline hover:text-yellow-300 block mb-2">
+          Orthopaedic Medical Correction Slippers – Zappos
+        </a>
+        <a href="https://www.amazon.in/SHAPECRUNCH-Support-Slippers-Flipflops-footbed/dp/B0BTJ594GX" target="_blank" class="text-blue-100 underline hover:text-yellow-300 block mb-2">
+          SHAPECRUNCH Arch Support Flip-Flops – Amazon
+        </a>
+        <a href="https://lbb.in/all/best-shoes-flat-feet/" target="_blank" class="text-blue-100 underline hover:text-yellow-300 block">
+          Browse More Flatfoot Shoe Options – LBB Guide
+        </a>
+        <br>
+        <h3>When to Seek Medical Assistance</h3>
+        <ul class="assistance-list">
+          <li>Persistent pain, stiffness, or difficulty walking.</li>
+          <li>Symptoms despite non-surgical treatments.</li>
+          <li>History of foot injuries or deformities.</li>
+        </ul>
+      </div>
+
+      <!-- High Arch Section -->
+      <div id="higharch-solutions" class="solution">
+        <h3>Solutions for High Arch</h3>
+        <ul class="solution-list">
+          <li>Cushioning insoles to reduce foot strain.</li>
+          <li>Stretching exercises to relieve tight muscles.</li>
+          <li>Shoes with proper arch support.</li>
+          <li>Physical therapy to improve balance and function.</li>
+        </ul>
+        <br>
+        <h3><b>Recommended Exercises</b></h3>
+        <ol class="therapies">
+          <li><b>Balance Exercises:</b> Improve proprioception using wobble boards or one-leg stands.</li>
+          <li><b>Ankle Strengthening:</b> Inversion and eversion exercises for stability.</li>
+          <li><b>Arch Lifts:</b> Build strength in muscles supporting the arch.</li>
+          <li><b>Heel Cord Stretch:</b> Reduce calf tension and plantar pressure.</li>
+        </ol>
+        <br>
+        <h3><b>Recommended Footwear</b></h3>
+        <a href="https://www.amazon.in/Support-Insoles-Plantar-Fasciitis-Orthotic/dp/B07TV78LYP" target="_blank" class="text-blue-100 underline hover:text-yellow-300 block mb-2">
+          Arch Support Insoles – Amazon India
+        </a>
+        <a href="https://www.amazon.com/KEEN-WK400-Walking-Shoes-Womens/dp/B0B2PSGVF6" target="_blank" class="text-blue-100 underline hover:text-yellow-300 block">
+          KEEN WK400 Walking Shoes – Amazon US
+        </a>
+      </div>
+
+      <!-- Normal Foot Section -->
+      <div id="normalfoot-solutions" class="solution">
+        <h3>Solutions for Normal Foot</h3>
+        <ul class="solution-list">
+          <li>Maintain healthy weight to prevent pressure build-up.</li>
+          <li>Regular stretching and strengthening of foot muscles.</li>
+          <li>Wear supportive shoes that match activity type.</li>
+          <li>Get routine check-ups with a podiatrist.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Add this inside your body, after the medical-solutions section -->
+<div id="footwear-images" class="mt-10">
+  <h2 class="text-white font-bold text-2xl">Recommended Shoe Previews</h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+    <!-- Flatfoot Shoe Images -->
+    <div id="flatfoot-images" style="display: none;">
+      <h3 class="text-yellow-100">Flatfoot</h3>
+      <img src="51i+WNhO2TL._SX522_.jpg" alt="Orthopaedic Slippers" class="rounded-xl">
+      <img src="71LkfbUEf-L._AC_SR1840,1472_.jpg" alt="Zappos arch support shoes" class="rounded-xl mt-2">
+    </div>
+
+    <!-- High Arch Shoe Images -->
+    <div id="higharch-images" style="display: none;">
+      <h3 class="text-yellow-100">High Arch</h3>
+      <img src="51FCgyAnmzL._SX679_.jpg" alt="Arch Support Insoles" class="rounded-xl">
+      <img src="71rIxBjQ-xL._AC_SY575_.jpg" alt="KEEN WK400 Shoes" class="rounded-xl mt-2">
+    </div>
+
+    <!-- Normal Foot Placeholder -->
+    <div id="normalfoot-images" style="display: none;">
+      <h3 class="text-yellow-100">Normal Foot</h3>
+      <p class="text-white">Use well-cushioned, neutral shoes from trusted brands.</p>
+    </div>
+  </div>
+</div>
+
+  <!-- PDF Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+  <!-- PDF Generation Script -->
+</body>
+</html>
